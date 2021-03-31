@@ -41,6 +41,7 @@ const closeLoadingTrigger = ($overlay) => {
   $overlay.classList.remove('justify-content-center');
 };
 
+// https://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
 export const detectMob = () => {
   const toMatch = [
     /Android/i,
