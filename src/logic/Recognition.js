@@ -39,7 +39,18 @@ export class Recognition {
       const arrangedAnswer = transcript
         .toLocaleLowerCase(this.app.selectedLanguage)
         .replace(' ', '');
-      recognizedAnswer = arrangedAnswer;
+
+      // Add the current transcript to the contents of our Note.
+      // There is a weird bug on mobile, where everything is repeated twice.
+      // There is no official solution so far so we have to handle an edge case.
+      let mobileRepeatBug =
+        current == 1 &&
+        event.results[current][0].transcript == event.results[0][0].transcript;
+
+      // https://demo.tutorialzine.com/2017/08/converting-from-speech-to-text-with-javascript/app.js
+      if (!mobileRepeatBug) {
+        recognizedAnswer = arrangedAnswer;
+      }
     };
     // replacement of variable
     this.microphone = {
