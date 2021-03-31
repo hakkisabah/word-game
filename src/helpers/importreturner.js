@@ -1,6 +1,6 @@
 import { generateNewGameSession } from '../helpers/game';
 import { Recognition } from '../logic/Recognition';
-import { recognitionHandlerHelper } from './recognition';
+import { recognitionHandlerHelper, detectMob } from './recognition';
 import { setUserConfiguration } from '../helpers/language';
 import { addScoreToApi, getLocalStorage, getDataFromApi } from '../action';
 import { detectNames } from '../helpers/names';
@@ -40,4 +40,5 @@ export const appHelper = {
   languages,
   elementDefines,
   getDataFromApi,
+  detectMob,
 };

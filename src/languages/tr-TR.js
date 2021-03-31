@@ -2,7 +2,7 @@ export const tr = {
   globalDefine: 'tr-TR',
   browserSupportAlert:
     'Tarayıcınız bu oyunu desteklemiyor, oyunu oynamak için ' +
-    'Chrome Tarayıcının En Son Sürümünü kullanmanız gerekiyor.',
+    'Chrome Tarayıcının En Son Sürümünü kişisel bir bilgisayar ile kullanmanız gerekiyor.',
   notPossibleAlert: 'Uygun görünmüyor',
   gameNotAvailable: 'Oyun Oynanamıyor',
   guessNextOne: 'Bir sonrakini tahmin et',

@@ -862,7 +862,8 @@ var appHelper = {
   updateUserConfiguration: _action__WEBPACK_IMPORTED_MODULE_4__.updateUserConfiguration,
   languages: _languages__WEBPACK_IMPORTED_MODULE_8__.languages,
   elementDefines: _defines__WEBPACK_IMPORTED_MODULE_9__.elementDefines,
-  getDataFromApi: _action__WEBPACK_IMPORTED_MODULE_4__.getDataFromApi
+  getDataFromApi: _action__WEBPACK_IMPORTED_MODULE_4__.getDataFromApi,
+  detectMob: _recognition__WEBPACK_IMPORTED_MODULE_2__.detectMob
 };
 
 /***/ }),
@@ -949,15 +950,8 @@ var Recognition = /*#__PURE__*/function () {
         var current = event.resultIndex; // eslint-disable-next-line prefer-destructuring
 
         var transcript = event.results[current][0].transcript;
-        var arrangedAnswer = transcript.toLocaleLowerCase(_this.app.selectedLanguage).replace(' ', ''); // Add the current transcript to the contents of our Note.
-        // There is a weird bug on mobile, where everything is repeated twice.
-        // There is no official solution so far so we have to handle an edge case.
-
-        var mobileRepeatBug = current == 1 && event.results[current][0].transcript == event.results[0][0].transcript; // https://demo.tutorialzine.com/2017/08/converting-from-speech-to-text-with-javascript/app.js
-
-        if (!mobileRepeatBug) {
-          recognizedAnswer = arrangedAnswer;
-        }
+        var arrangedAnswer = transcript.toLocaleLowerCase(_this.app.selectedLanguage).replace(' ', '');
+        recognizedAnswer = arrangedAnswer;
       }; // replacement of variable
 
 
@@ -993,7 +987,7 @@ var Recognition = /*#__PURE__*/function () {
       return new Promise(function (resolve, reject) {
         try {
           // Microsoft Edge => 89.0.774.63 does not work stable
-          if (/Edg/.test(navigator.userAgent) === false) {
+          if (/Edg/.test(navigator.userAgent) === false && _this2.app.GameProps.appHelper.detectMob() === false) {
             // Test for browser
             var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             var recognition = new SpeechRecognition();
@@ -1047,7 +1041,8 @@ var Recognition = /*#__PURE__*/function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "recognitionHandlerHelper": () => (/* binding */ recognitionHandlerHelper)
+/* harmony export */   "recognitionHandlerHelper": () => (/* binding */ recognitionHandlerHelper),
+/* harmony export */   "detectMob": () => (/* binding */ detectMob)
 /* harmony export */ });
 var recognitionHandlerHelper = function recognitionHandlerHelper(_ref) {
   var app = _ref.app,
@@ -1100,6 +1095,13 @@ var closeLoadingTrigger = function closeLoadingTrigger($overlay) {
   $overlay.classList.remove('d-flex');
   $overlay.classList.remove('d-align-items-center');
   $overlay.classList.remove('justify-content-center');
+};
+
+var detectMob = function detectMob() {
+  var toMatch = [/Android/i, /webOS/i, /iPhone/i, /iPad/i, /iPod/i, /BlackBerry/i, /Windows Phone/i];
+  return toMatch.some(function (toMatchItem) {
+    return navigator.userAgent.match(toMatchItem);
+  });
 };
 
 /***/ }),
@@ -1558,7 +1560,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var tr = {
   globalDefine: 'tr-TR',
-  browserSupportAlert: 'Tarayıcınız bu oyunu desteklemiyor, oyunu oynamak için ' + 'Chrome Tarayıcının En Son Sürümünü kullanmanız gerekiyor.',
+  browserSupportAlert: 'Tarayıcınız bu oyunu desteklemiyor, oyunu oynamak için ' + 'Chrome Tarayıcının En Son Sürümünü kişisel bir bilgisayar ile kullanmanız gerekiyor.',
   notPossibleAlert: 'Uygun görünmüyor',
   gameNotAvailable: 'Oyun Oynanamıyor',
   guessNextOne: 'Bir sonrakini tahmin et',
@@ -1613,7 +1615,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var en = {
   globalDefine: 'en-US',
-  browserSupportAlert: 'Your browser does not support it, ' + 'you need to use the Latest Chrome Browser to play the game.',
+  browserSupportAlert: 'Your browser does not support it, ' + 'you need to use the Latest Chrome Browser with only personal computer to play the game.',
   notPossibleAlert: 'Its Not Possible',
   gameNotAvailable: 'Game not Available',
   guessNextOne: 'Guess next one',

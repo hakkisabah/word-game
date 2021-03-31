@@ -39,18 +39,7 @@ export class Recognition {
       const arrangedAnswer = transcript
         .toLocaleLowerCase(this.app.selectedLanguage)
         .replace(' ', '');
-
-      // Add the current transcript to the contents of our Note.
-      // There is a weird bug on mobile, where everything is repeated twice.
-      // There is no official solution so far so we have to handle an edge case.
-      let mobileRepeatBug =
-        current == 1 &&
-        event.results[current][0].transcript == event.results[0][0].transcript;
-
-      // https://demo.tutorialzine.com/2017/08/converting-from-speech-to-text-with-javascript/app.js
-      if (!mobileRepeatBug) {
-        recognizedAnswer = arrangedAnswer;
-      }
+      recognizedAnswer = arrangedAnswer;
     };
     // replacement of variable
     this.microphone = {
@@ -83,7 +72,10 @@ export class Recognition {
     return new Promise((resolve, reject) => {
       try {
         // Microsoft Edge => 89.0.774.63 does not work stable
-        if (/Edg/.test(navigator.userAgent) === false) {
+        if (
+          /Edg/.test(navigator.userAgent) === false &&
+          this.app.GameProps.appHelper.detectMob() === false
+        ) {
           // Test for browser
           let SpeechRecognition =
             window.SpeechRecognition || window.webkitSpeechRecognition;

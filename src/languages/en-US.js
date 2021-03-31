@@ -2,7 +2,7 @@ export const en = {
   globalDefine: 'en-US',
   browserSupportAlert:
     'Your browser does not support it, ' +
-    'you need to use the Latest Chrome Browser to play the game.',
+    'you need to use the Latest Chrome Browser with only personal computer to play the game.',
   notPossibleAlert: 'Its Not Possible',
   gameNotAvailable: 'Game not Available',
   guessNextOne: 'Guess next one',

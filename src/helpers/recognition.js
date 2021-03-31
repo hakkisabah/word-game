@@ -40,3 +40,19 @@ const closeLoadingTrigger = ($overlay) => {
   $overlay.classList.remove('d-align-items-center');
   $overlay.classList.remove('justify-content-center');
 };
+
+export const detectMob = () => {
+  const toMatch = [
+    /Android/i,
+    /webOS/i,
+    /iPhone/i,
+    /iPad/i,
+    /iPod/i,
+    /BlackBerry/i,
+    /Windows Phone/i,
+  ];
+
+  return toMatch.some((toMatchItem) => {
+    return navigator.userAgent.match(toMatchItem);
+  });
+};
