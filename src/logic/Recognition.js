@@ -1,5 +1,3 @@
-import { recognitionHandlerHelper } from '../helpers/recognition';
-
 export class Recognition {
   constructor(app) {
     this.app = app;
@@ -13,7 +11,7 @@ export class Recognition {
     let recognition = this._createRecognition(this._handleRecognition);
     let recognizedAnswer = '';
     const recognitionHandlerController = (() =>
-      recognitionHandlerHelper({
+      this.app.GameProps.appCenter.recognitionHandlerHelper({
         app: this.app,
         recognition,
       }))();

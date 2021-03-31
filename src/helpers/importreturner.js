@@ -1,5 +1,6 @@
 import { generateNewGameSession } from '../helpers/game';
 import { Recognition } from '../logic/Recognition';
+import { recognitionHandlerHelper } from './recognition';
 import { setUserConfiguration } from '../helpers/language';
 import { addScoreToApi, getLocalStorage, getDataFromApi } from '../action';
 import { detectNames } from '../helpers/names';
@@ -17,6 +18,7 @@ import {
 export const appCenter = {
   generateNewGameSession,
   Recognition,
+  recognitionHandlerHelper,
   setUserConfiguration,
   addScoreToApi,
   getLocalStorage,
